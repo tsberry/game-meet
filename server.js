@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan'); // used to see requests
 const app = express();
 const db = require('./models');
+const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 
 // Setting CORS so that any website can
@@ -87,11 +88,7 @@ app.use(function (err, req, res, next) {
   }
 });
 
-// Send every request to the React app
-// Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+app.use(routes);
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
