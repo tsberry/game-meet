@@ -31,7 +31,7 @@ let MeetSchema = new Schema({
         type: String
     },
     host: { type: Schema.Types.ObjectId, ref: 'User' },
-    attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    attendees: [{ type: Schema.Types.ObjectId, ref: "User" }],
     meetId: {
         type: Number,
         required: true,

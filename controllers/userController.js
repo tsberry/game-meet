@@ -31,5 +31,20 @@ module.exports = {
                 res.status(404).send({ success: false, message: 'No user found' });
             }
         }).catch(err => res.status(400).send(err));
+    },
+
+    addMeet: function (req,res) {
+        db.User.findById(req.body._id)
+        .then(user => {
+            db.Meet.findOne({meetId: req.body.meetId})
+            .then(meet => {
+                user.meets.push(meet);
+                user.save()
+                .then(updatedUser => res.json(updatedUser))
+                .catch(err => res.status(400).json(err));
+            })
+            .catch(err => res.status(400).json(err));
+        })
+        .catch(err => res.status(400).json(err));
     }
 }

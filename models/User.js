@@ -25,7 +25,8 @@ let UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  events: [{type: Schema.Types.ObjectId, ref: 'Meet'}]
 });
 
 // Execute before each user.save() call

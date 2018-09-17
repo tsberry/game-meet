@@ -11,4 +11,6 @@ router.post('/signup', userController.signup);
 // to access
 router.get('/:id', isAuthenticated, userController.getUser);
 
+router.post("/add", userController.addMeet);
+
 module.exports = router;
