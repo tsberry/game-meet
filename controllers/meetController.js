@@ -29,16 +29,20 @@ module.exports = {
 
     addAttendee: function (req, res) {
         db.User.findById(req.body._id)
-        .then(user => {
-            db.Meet.findOne({meetId: req.body.meetId})
-            .then(meet => {
-                meet.attendees.push(user);
-                meet.save()
-                .then(updatedMeet => res.json(updatedMeet))
-                .catch(err => res.status(400).json(err));
+            .then(user => {
+                db.Meet.findOne({ meetId: req.body.meetId })
+                    .then(meet => {
+                        meet.attendees.push(user);
+                        user.meets.push(meet);
+                        meet.save()
+                            .then(updatedMeet => {
+                                user.save()
+                                    .then(updatedUser => res.json(updatedMeet));
+                            })
+                            .catch(err => res.status(400).json(err));
+                    })
+                    .catch(err => res.status(400).json(err));
             })
             .catch(err => res.status(400).json(err));
-        })
-        .catch(err => res.status(400).json(err));
     }
 }

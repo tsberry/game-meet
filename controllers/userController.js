@@ -24,7 +24,9 @@ module.exports = {
     },
 
     getUser: function (req, res) {
-        db.User.findById(req.params.id).then(data => {
+        db.User.findById(req.params.id)
+        .populate("meets")
+        .then(data => {
             if (data) {
                 res.json(data);
             } else {
