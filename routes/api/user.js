@@ -10,5 +10,7 @@ router.post('/signup', userController.signup);
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 router.get('/:id', isAuthenticated, userController.getUser);
+router.post("/add", isAuthenticated, userController.addAttendee);
+router.delete("/remove", isAuthenticated, userController.removeAttendee);
 
 module.exports = router;

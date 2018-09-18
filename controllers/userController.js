@@ -1,5 +1,6 @@
 const db = require("../models");
 const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
 
 module.exports = {
     login: function (req, res) {
@@ -35,18 +36,47 @@ module.exports = {
         }).catch(err => res.status(400).send(err));
     },
 
-    addMeet: function (req,res) {
+    addAttendee: function (req, res) {
         db.User.findById(req.body._id)
-        .then(user => {
-            db.Meet.findOne({meetId: req.body.meetId})
-            .then(meet => {
-                user.meets.push(meet);
-                user.save()
-                .then(updatedUser => res.json(updatedUser))
-                .catch(err => res.status(400).json(err));
+            .then(user => {
+                db.Meet.findOne({ meetId: req.body.meetId })
+                    .then(meet => {
+                        const inMeetArray = meet.attendees.some(function (ids) {
+                            return ids.equals(user._id);
+                        });
+                        const inUserArray = user.meets.some(function (ids) {
+                            return ids.equals(meet._id);
+                        });
+                        if(!inMeetArray) meet.attendees.push(user);
+                        if(!inUserArray) user.meets.push(meet);
+                        meet.save()
+                            .then(updatedMeet => {
+                                user.save()
+                                    .then(updatedUser => res.json(updatedMeet));
+                            })
+                            .catch(err => res.status(400).json(err));
+                    })
+                    .catch(err => res.status(400).json(err));
             })
             .catch(err => res.status(400).json(err));
-        })
-        .catch(err => res.status(400).json(err));
+    },
+
+    removeAttendee: function (req, res) {
+        db.User.findById(req.body._id)
+            .then(user => {
+                db.Meet.findOne({ meetId: req.body.meetId })
+                    .then(meet => {
+                        meet.attendees.remove(user);
+                        user.meets.remove(meet);
+                        meet.save()
+                            .then(updatedMeet => {
+                                user.save()
+                                    .then(updatedUser => res.json(updatedMeet));
+                            })
+                            .catch(err => res.status(400).json(err));
+                    })
+                    .catch(err => res.status(400).json(err));
+            })
+            .catch(err => res.status(400).json(err));
     }
 }
