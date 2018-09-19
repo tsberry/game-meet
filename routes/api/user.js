@@ -11,6 +11,6 @@ router.post('/signup', userController.signup);
 // to access
 router.get('/:id', isAuthenticated, userController.getUser);
 router.post("/add", isAuthenticated, userController.addAttendee);
-router.delete("/remove", isAuthenticated, userController.removeAttendee);
+router.delete("/remove/:userId/:meetId", isAuthenticated, userController.removeAttendee);
 
 module.exports = router;

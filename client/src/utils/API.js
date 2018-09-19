@@ -32,5 +32,11 @@ export default {
     },
     getMeets: () => {
         return axios.get('/api/meet');
+    },
+    joinMeet: (meetId, userId) => {
+        return axios.post('/api/user/add', {meetId: meetId, userId: userId});
+    },
+    leaveMeet: (meetId, userId) => {
+        return axios.delete(`/api/user/remove/${userId}/${meetId}`);
     }
 };

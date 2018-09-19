@@ -62,9 +62,9 @@ module.exports = {
     },
 
     removeAttendee: function (req, res) {
-        db.User.findById(req.body.userId)
+        db.User.findById(req.params.userId)
             .then(user => {
-                db.Meet.findById(req.body.meetId)
+                db.Meet.findById(req.params.meetId)
                     .then(meet => {
                         meet.attendees.remove(user);
                         user.meets.remove(meet);
