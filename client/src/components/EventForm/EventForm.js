@@ -20,12 +20,12 @@ class EventForm extends Component {
             handle: "",
             location: ""
         };
-      }
+    }
 
     handleFormSubmit = event => {
         event.preventDefault();
-        API.saveEvent(this.state.game, this.state.description, this.state.time, this.state.online, this.state.instructions, this.state.handle, this.state.location, auth.getProfile()._id)
-            .then(res => this.props.onQuestion(res.data)).catch(err => alert(err.message));
+        API.saveEvent(this.state.game, this.state.description, this.state.time, this.state.online, this.state.instructions, this.state.handle, this.state.location, auth.getProfile().id)
+            .then(res => console.log(res)).catch(err => console.log(err.response.data));
     };
 
     handleChange = event => {
@@ -52,9 +52,9 @@ class EventForm extends Component {
                         id="description"
                         onChange={this.handleChange} />
                     <label htmlFor="time">When is your event?</label>
-                    <textarea
+                    <input
                         name="time"
-                        type="text"
+                        type="datetime-local"
                         id="time"
                         onChange={this.handleChange} />
                     <label htmlFor="online">Is your event online or in person?</label>
@@ -72,7 +72,11 @@ class EventForm extends Component {
                         type="text"
                         id="instructions"
                         onChange={this.handleChange} />
-                    <LocOrHandle online={this.state.online} handleChange={this.handleChange}/>
+                    <LocOrHandle online={this.state.online} handleChange={this.handleChange} />
+                    <input
+                        type="submit"
+                        value="Add Event"
+                    />
                 </form>
             </div>
         );

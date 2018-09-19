@@ -32,11 +32,6 @@ let MeetSchema = new Schema({
     },
     host: { type: Schema.Types.ObjectId, ref: 'User' },
     attendees: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    meetId: {
-        type: Number,
-        required: true,
-        unique: true
-    },
     createdAt: {
       type: Date,
       default: Date.now
