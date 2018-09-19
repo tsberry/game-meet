@@ -15,5 +15,13 @@ module.exports = {
             .populate("attendees", "username")
             .then(data => res.json(data))
             .catch(err => res.status(400).json(err));
+    },
+
+    getAll: function (req, res) {
+        db.Meet.find({})
+            .populate("host", "username")
+            .populate("attendees", "username")
+            .then(data => res.json(data))
+            .catch(err => res.status(400).json(err));
     }
 }

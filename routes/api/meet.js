@@ -4,6 +4,6 @@ const isAuthenticated = require("../../config/auth");
 
 router.post("/", meetController.saveMeet);
 router.get("/:id", isAuthenticated, meetController.getMeet);
-
+router.get("/", meetController.getAll);
 
 module.exports = router;

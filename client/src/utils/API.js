@@ -26,5 +26,8 @@ export default {
         }
 
         return axios.post('/api/meet', data);
+    },
+    getMeets: () => {
+        return axios.get('/api/meet');
     }
 };

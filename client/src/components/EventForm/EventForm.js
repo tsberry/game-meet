@@ -43,23 +43,27 @@ class EventForm extends Component {
                     <input
                         name="game"
                         type="text"
+                        className="form-control"
                         id="game"
                         onChange={this.handleChange} />
                     <label htmlFor="description">Describe your event</label>
                     <textarea
                         name="description"
                         type="text"
+                        className="form-control"
                         id="description"
                         onChange={this.handleChange} />
                     <label htmlFor="time">When is your event?</label>
                     <input
                         name="time"
                         type="datetime-local"
+                        className="form-control"
                         id="time"
                         onChange={this.handleChange} />
                     <label htmlFor="online">Is your event online or in person?</label>
                     <select
                         name="online"
+                        className="form-control"
                         onChange={this.handleChange}
                         defaultValue={this.state.online}
                     >
@@ -70,11 +74,13 @@ class EventForm extends Component {
                     <textarea
                         name="instructions"
                         type="text"
+                        className="form-control"
                         id="instructions"
                         onChange={this.handleChange} />
                     <LocOrHandle online={this.state.online} handleChange={this.handleChange} />
                     <input
                         type="submit"
+                        className="button"
                         value="Add Event"
                     />
                 </form>

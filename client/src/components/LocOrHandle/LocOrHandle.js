@@ -8,6 +8,7 @@ class LocOrHandle extends Component {
             <input
                 name="handle"
                 type="text"
+                className="form-control"
                 id="handle"
                 onChange={this.props.handleChange} />
         </div>;
@@ -17,6 +18,7 @@ class LocOrHandle extends Component {
             <textarea
                 name="location"
                 type="text"
+                className="form-control"
                 id="location"
                 onChange={this.props.handleChange} />
         </div>;
