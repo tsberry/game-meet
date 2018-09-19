@@ -37,9 +37,9 @@ module.exports = {
     },
 
     addAttendee: function (req, res) {
-        db.User.findById(req.body._id)
+        db.User.findById(req.body.userId)
             .then(user => {
-                db.Meet.findOne({ meetId: req.body.meetId })
+                db.Meet.findById(req.body.meetId)
                     .then(meet => {
                         const inMeetArray = meet.attendees.some(function (ids) {
                             return ids.equals(user._id);
@@ -62,9 +62,9 @@ module.exports = {
     },
 
     removeAttendee: function (req, res) {
-        db.User.findById(req.body._id)
+        db.User.findById(req.body.userId)
             .then(user => {
-                db.Meet.findOne({ meetId: req.body.meetId })
+                db.Meet.findById(req.body.meetId)
                     .then(meet => {
                         meet.attendees.remove(user);
                         user.meets.remove(meet);

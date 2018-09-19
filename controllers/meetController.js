@@ -8,9 +8,7 @@ module.exports = {
     },
 
     getMeet: function (req, res) {
-        db.Meet.findOne({
-            meetId: req.params.id
-        })
+        db.Meet.findById(req.params.id)
             .populate("host", "username")
             .populate("attendees", "username")
             .then(data => res.json(data))

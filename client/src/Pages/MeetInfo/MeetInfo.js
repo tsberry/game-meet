@@ -25,9 +25,11 @@ class MeetInfo extends Component {
                         time={meet.time}
                         instructions={meet.instructions}
                         online={meet.online}
-                        host={meet.host}
+                        host={meet.host.username}
                         handle={meet.online ? meet.handle : ""}
                         location={!meet.online ? meet.location : ""}
+                        attendees={meet.attendees ? meet.attendees : []}
+                        verbose={false}
                         key={meet._id}
                     />
                 )}
