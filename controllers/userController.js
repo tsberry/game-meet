@@ -52,7 +52,14 @@ module.exports = {
                         meet.save()
                             .then(updatedMeet => {
                                 user.save()
-                                    .then(updatedUser => res.json(updatedMeet));
+                                    .then(updatedUser => {
+                                        updatedMeet
+                                        .populate("host")
+                                        .populate("attendees")
+                                        .execPopulate()
+                                        .then(data => res.json(data))
+                                        .catch(err => res.status(400).json(err));
+                                    });
                             })
                             .catch(err => res.status(400).json(err));
                     })
@@ -71,7 +78,14 @@ module.exports = {
                         meet.save()
                             .then(updatedMeet => {
                                 user.save()
-                                    .then(updatedUser => res.json(updatedMeet));
+                                    .then(updatedUser => {
+                                        updatedMeet
+                                        .populate("host")
+                                        .populate("attendees")
+                                        .execPopulate()
+                                        .then(data => res.json(data))
+                                        .catch(err => res.status(400).json(err));
+                                    });
                             })
                             .catch(err => res.status(400).json(err));
                     })

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MeetDisplay from "../../components/MeetDisplay";
-import JoinMeet from "../../components/JoinMeet";
-import LeaveMeet from "../../components/LeaveMeet";
+import MeetButton from "../../components/MeetButton";
 import API from "../../utils/API";
 import AuthService from "../../components/AuthService";
 
@@ -19,6 +18,10 @@ class SingleMeet extends Component {
             })
     }
 
+    onButton = data => {
+        this.setState({ meet: data, attendees: data.attendees });
+    }
+
     render() {
         return (
             <div>
@@ -34,15 +37,13 @@ class SingleMeet extends Component {
                     attendees={this.state.attendees}
                     verbose={true}
                 />
-                {this.state.attendees.find(attendee => attendee._id === auth.getProfile().id) ?
-                    <LeaveMeet
-                        meetId={this.state.meet._id}
-                    />
-                    :
-                    <JoinMeet
-                        meetId={this.state.meet._id}
-                    />
-                }
+
+                <MeetButton
+                    meetId={this.state.meet._id}
+                    userId={auth.getProfile().id}
+                    which={this.state.attendees.find(attendee => attendee._id === auth.getProfile().id) ? "leave" : "join"}
+                    onButton={this.onButton}
+                />
             </div>
         );
     }
