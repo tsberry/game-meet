@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class MeetDisplay extends Component {
 
     render() {
         return (
             <div>
-                <h2>Game: {this.props.game}</h2>
+                {this.props.verbose ? <h2>Game: {this.props.game}</h2> : <Link to={`/meets/${this.props.id}`}><h2>Game: {this.props.game}</h2></Link>}
                 <p>Description: {this.props.description}</p>
                 <p>Time: {this.props.time}</p>
                 <p>How to Join: {this.props.instructions}</p>
@@ -19,7 +20,7 @@ class MeetDisplay extends Component {
                         </ul>
                     </div>
                     :
-                    <p>{this.props.attendees.length} People Attending this Event</p>}
+                    <p>{this.props.attendees.length} {this.props.attendees.length !== 1 ? "People" : "Person"} Attending this Event</p>}
             </div>
         );
     }

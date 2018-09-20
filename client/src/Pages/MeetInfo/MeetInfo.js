@@ -30,6 +30,7 @@ class MeetInfo extends Component {
                         location={!meet.online ? meet.location : ""}
                         attendees={meet.attendees ? meet.attendees : []}
                         verbose={false}
+                        id={meet._id}
                         key={meet._id}
                     />
                 )}

@@ -3,6 +3,7 @@ import MeetDisplay from "../../components/MeetDisplay";
 import MeetButton from "../../components/MeetButton";
 import API from "../../utils/API";
 import AuthService from "../../components/AuthService";
+import { Link } from "react-router-dom";
 
 const auth = new AuthService();
 
@@ -36,6 +37,7 @@ class SingleMeet extends Component {
                     location={!this.state.meet.online ? this.state.meet.location : ""}
                     attendees={this.state.attendees}
                     verbose={true}
+                    id={this.state.meet._id}
                 />
 
                 <MeetButton
@@ -44,6 +46,8 @@ class SingleMeet extends Component {
                     which={this.state.attendees.find(attendee => attendee._id === auth.getProfile().id) ? "leave" : "join"}
                     onButton={this.onButton}
                 />
+
+                <Link to="/meets">Back to Meets</Link>
             </div>
         );
     }
