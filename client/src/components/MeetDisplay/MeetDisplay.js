@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 class MeetDisplay extends Component {
 
@@ -8,7 +9,7 @@ class MeetDisplay extends Component {
             <div>
                 {this.props.verbose ? <h2>Game: {this.props.game}</h2> : <Link to={`/meets/${this.props.id}`}><h2>Game: {this.props.game}</h2></Link>}
                 <p>Description: {this.props.description}</p>
-                <p>Time: {this.props.time}</p>
+                <p>Time: {moment(this.props.time).format("MMMM Do YYYY [at] h:mm A")}</p>
                 <p>How to Join: {this.props.instructions}</p>
                 <p>Hosted by: {this.props.host}</p>
                 <p>{this.props.online ? "Host Gamertag: " + this.props.handle : "Event Location: " + this.props.location}</p>

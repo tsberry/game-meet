@@ -80,7 +80,7 @@ class EventForm extends Component {
                     <LocOrHandle online={this.state.online} handleChange={this.handleChange} />
                     <input
                         type="submit"
-                        className="button"
+                        className="btn"
                         value="Add Event"
                     />
                 </form>
