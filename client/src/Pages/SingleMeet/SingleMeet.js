@@ -3,7 +3,6 @@ import MeetDisplay from "../../components/MeetDisplay";
 import MeetButton from "../../components/MeetButton";
 import API from "../../utils/API";
 import AuthService from "../../components/AuthService";
-import { Link } from "react-router-dom";
 
 const auth = new AuthService();
 
@@ -47,7 +46,7 @@ class SingleMeet extends Component {
                     onButton={this.onButton}
                 />
 
-                <Link to="/meets">Back to Meets</Link>
+                <button className="btn" onClick={() => this.props.history.goBack()}>Back to Meets</button>
             </div>
         );
     }
