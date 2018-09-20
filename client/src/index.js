@@ -2,20 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-
-import registerServiceWorker from './registerServiceWorker';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
 import axios from "axios";
 
-// Our Components
-import Login from './components/Login';
-import Profile from './components/Profile';
-import Signup from './components/Signup';
-import Navbar from './components/Navbar';
-import CreateEvent from "./Pages/CreateEvent";
-import MeetInfo from "./Pages/MeetInfo";
-import SingleMeet from "./Pages/SingleMeet";
-import Home from "./Pages/Home";
+import registerServiceWorker from './registerServiceWorker';
 
 // Here is if we have an id_token in localStorage
 if (localStorage.getItem("id_token")) {
@@ -24,20 +13,7 @@ if (localStorage.getItem("id_token")) {
 }
 
 ReactDOM.render(
-    <Router>
-        <div>
-            <Navbar />
-            <div className="container">
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/profile" component={Profile} />
-                <Route exact path="/create" component={CreateEvent} />
-                <Route exact path="/meets" component={MeetInfo} />
-                <Route exact path="/meets/:id" component={SingleMeet} />
-            </div>
-        </div>
-    </Router>
+    <App />
     , document.getElementById('root')
 );
 registerServiceWorker();

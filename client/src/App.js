@@ -1,37 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import AuthService from './components/AuthService';
 import withAuth from './components/withAuth';
-const Auth = new AuthService();
+import { Route, BrowserRouter as Router } from 'react-router-dom';
+
+// Our Components
+import Login from './components/Login';
+import Profile from './components/Profile';
+import Signup from './components/Signup';
+import Navbar from './components/Navbar';
+import CreateEvent from "./Pages/CreateEvent";
+import MeetInfo from "./Pages/MeetInfo";
+import SingleMeet from "./Pages/SingleMeet";
+import Home from "./Pages/Home";
 
 class App extends Component {
 
-
-  handleLogout = () => {
-    Auth.logout();
-    this.props.history.replace('/signup');
-  };
-
-  goToEditProfile = () => {
-    this.props.history.replace('/profile');
-  };
-
-  render() {
-    console.log(process.env.REACT_APP_SECRET_CODE);
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome {this.props.user.email}</h2>
-        </div>
-        <p className="App-intro">
-          <button type="button" className="btn btn-primary" onClick={this.goToEditProfile}>Go to Profile</button>
-          <button type="button" className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Navbar />
+                    <div className="container">
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/signup" component={Signup} />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/create" component={CreateEvent} />
+                        <Route exact path="/meets" component={MeetInfo} />
+                        <Route exact path="/meets/:id" component={SingleMeet} />
+                    </div>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default withAuth(App);
