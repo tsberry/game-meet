@@ -33,6 +33,22 @@ export default {
     getMeets: () => {
         return axios.get('/api/meet');
     },
+    search: (game, time, online, handle, location) => {
+        let queryString = "";
+        if(game !== "") queryString += `game=${game}`;
+        if(time !== "") queryString += `time=${time}`;
+        if(online !== "") {
+            if(online === "online") {
+                queryString += "online=true";
+                if(handle !== "") queryString += `handle=${handle}`;
+            }
+            else {
+                queryString += "online=false";
+                if(location !== "") queryString += `location=${location}`;
+            }
+        }
+        return axios.get(`/api/meet/search?${queryString}`);
+    },
     joinMeet: (meetId, userId) => {
         return axios.post('/api/user/add', {meetId: meetId, userId: userId});
     },

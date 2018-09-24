@@ -12,6 +12,7 @@ import CreateEvent from "./Pages/CreateEvent";
 import MeetInfo from "./Pages/MeetInfo";
 import SingleMeet from "./Pages/SingleMeet";
 import Home from "./Pages/Home";
+import Search from "./Pages/Search";
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/create" component={CreateEvent} />
+                        <Route exact path="/search" component={Search} />
                         <Route exact path="/meets" component={MeetInfo} />
                         <Route exact path="/meets/:id" component={SingleMeet} />
                     </div>

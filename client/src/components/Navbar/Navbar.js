@@ -13,7 +13,13 @@ class Navbar extends Component {
             return (
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/meets">Browse Meets</Link>
+                        <Link className="nav-link" to={{
+                            pathname: '/meets',
+                            state: {} 
+                        }}> Browse Meets</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/search"> Search Meets</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/create">Create a Meet</Link>
@@ -43,7 +49,7 @@ class Navbar extends Component {
 
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark" style={{"background-color": "#1034A6"}}>
+            <nav className="navbar navbar-expand-lg navbar-dark" style={{ "backgroundColor": "#1034A6" }}>
                 <div className="container">
                     <Link className="navbar-brand" to="/">Game-Meet</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

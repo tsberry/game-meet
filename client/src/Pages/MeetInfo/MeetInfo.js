@@ -7,18 +7,29 @@ class MeetInfo extends Component {
         meets: []
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.state !== {meets: []}) {
+            API.getMeets()
+                .then(res => {
+                    this.setState({ meets: res.data });
+                });
+        }
+    }
+
     componentDidMount() {
-        API.getMeets()
-        .then(res => {
-            this.setState({ meets: res.data});
-            console.log(this.state.meets);
-        })
+        if (this.props.location.state && this.props.location.state.meets) this.setState({ meets: this.props.location.state.meets });
+        else {
+            API.getMeets()
+                .then(res => {
+                    this.setState({ meets: res.data });
+                });
+        }
     }
 
     render() {
         return (
             <div>
-                {this.state.meets.map(meet => 
+                {this.state.meets.map(meet =>
                     <MeetDisplay
                         game={meet.game}
                         description={meet.description}
