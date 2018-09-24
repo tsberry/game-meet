@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import withAuth from './components/withAuth';
+// import withAuth from './components/withAuth';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 // Our Components
@@ -35,4 +35,4 @@ class App extends Component {
     }
 }
 
-export default withAuth(App);
+export default App;
