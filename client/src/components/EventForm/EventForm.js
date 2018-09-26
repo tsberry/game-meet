@@ -18,13 +18,16 @@ class EventForm extends Component {
             online: "online",
             instructions: "",
             handle: "",
-            location: ""
+            address: "",
+            city: "",
+            state: "",
+            zip: ""
         };
     }
 
     handleFormSubmit = event => {
         event.preventDefault();
-        API.saveEvent(this.state.game, this.state.description, this.state.time, this.state.online, this.state.instructions, this.state.handle, this.state.location, auth.getProfile().id)
+        API.saveEvent(this.state.game, this.state.description, this.state.time, this.state.online, this.state.instructions, this.state.handle, this.state.address, this.state.city, this.state.state, this.state.zip, auth.getProfile().id)
             .then(res => console.log(res)).catch(err => console.log(err.response.data));
     };
 

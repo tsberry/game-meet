@@ -8,7 +8,7 @@ export default {
     signUpUser: (username, email, password) => {
         return axios.post('api/user/signup', { username: username, email: email, password: password });
     },
-    saveEvent: (game, description, time, online, instructions, handle, location, id) => {
+    saveEvent: (game, description, time, online, instructions, handle, address, city, state, zip, id) => {
         let data = {
             game: game,
             description: description,
@@ -22,7 +22,11 @@ export default {
         }
         else {
             data.online = false;
-            data.location = location;
+            data.location = {};
+            data.location.address = address;
+            data.location.city = city;
+            data.location.state = state;
+            data.location.zip = zip;
         }
 
         return axios.post('/api/meet', data);

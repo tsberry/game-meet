@@ -12,7 +12,11 @@ class MeetDisplay extends Component {
                 <p>Time: {moment(this.props.time).format("MMMM Do YYYY [at] h:mm A")}</p>
                 <p>How to Join: {this.props.instructions}</p>
                 <p>Hosted by: {this.props.host}</p>
-                <p>{this.props.online ? "Host Gamertag: " + this.props.handle : "Event Location: " + this.props.location}</p>
+                <p>{this.props.online ?
+                    "Host Gamertag: " + this.props.handle 
+                    : 
+                    this.props.location ? "Event Location: " + this.props.location.address + " " + this.props.location.city + ", " + this.props.location.state + " " + this.props.location.zip : ""
+                    }</p>
                 {this.props.verbose ?
                     <div>
                         <h3>Attendees</h3>
