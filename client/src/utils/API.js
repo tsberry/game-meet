@@ -22,11 +22,10 @@ export default {
         }
         else {
             data.online = false;
-            data.location = {};
-            data.location.address = address;
-            data.location.city = city;
-            data.location.state = state;
-            data.location.zip = zip;
+            data.address = address;
+            data.city = city;
+            data.state = state;
+            data.zip = zip;
         }
 
         return axios.post('/api/meet', data);
@@ -37,21 +36,29 @@ export default {
     getMeets: () => {
         return axios.get('/api/meet');
     },
-    search: (game, time, online, handle, location) => {
-        let queryString = "";
-        if(game !== "") queryString += `game=${game}`;
-        if(time !== "") queryString += `time=${time}`;
+    search: (game, time, online, handle, address, city, state, zip) => {
+        let params = {};
+        if(game !== "") params.game = game;
+        if(time !== "") params.time = time;
         if(online !== "") {
             if(online === "online") {
-                queryString += "online=true";
-                if(handle !== "") queryString += `handle=${handle}`;
+                params.online = true;
+                if(handle !== "") params.handle = handle;
             }
             else {
-                queryString += "online=false";
-                if(location !== "") queryString += `location=${location}`;
+                params.online = false;
+                if(address !== "") params.address = address;
+                if(city !== "") params.city = city;
+                if(state !== "") params.state = state;
+                if(zip !== "") params.zip = zip;
             }
         }
-        return axios.get(`/api/meet/search?${queryString}`);
+        let esc = encodeURIComponent;
+        let query = Object.keys(params)
+            .map(k => esc(k) + '=' + esc(params[k]))
+            .join('&');
+        
+        return axios.get(`/api/meet/search?${query}`);
     },
     joinMeet: (meetId, userId) => {
         return axios.post('/api/user/add', {meetId: meetId, userId: userId});

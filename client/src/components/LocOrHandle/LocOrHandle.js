@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class LocOrHandle extends Component {
     render() {
-        console.log(this.props.online);
         const onlineBlock = <div>
             <label htmlFor="handle">What is your relevant handle or gamertag?</label>
             <input

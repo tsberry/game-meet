@@ -38,7 +38,10 @@ class MeetInfo extends Component {
                         online={meet.online}
                         host={meet.host.username}
                         handle={meet.online ? meet.handle : ""}
-                        location={!meet.online ? meet.location : ""}
+                        address={!meet.online ? meet.address : ""}
+                        city={!meet.online ? meet.city : ""}
+                        state={!meet.online ? meet.state : ""}
+                        zip={!meet.online ? meet.zip : ""}
                         attendees={meet.attendees ? meet.attendees : []}
                         verbose={false}
                         id={meet._id}

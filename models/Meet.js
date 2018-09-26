@@ -39,8 +39,17 @@ let MeetSchema = new Schema({
         type: Boolean,
         required: true
     },
-    location: {
-        type: LocationSchema
+    address: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    zip: {
+        type: Number
     },
     instructions: {
         type: String,

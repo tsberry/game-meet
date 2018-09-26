@@ -8,12 +8,15 @@ class Search extends Component {
             time: "",
             online: "",
             handle: "",
-            location: ""
+            address: "",
+            city: "",
+            state: "",
+            zip: ""
     }
 
     handleFormSubmit = event => {
         event.preventDefault();
-        API.search(this.state.game, this.state.time, this.state.online, this.state.handle, this.state.location)
+        API.search(this.state.game, this.state.time, this.state.online, this.state.handle, this.state.address, this.state.city, this.state.state, this.state.zip)
             .then(res => {
                 this.props.history.push("/meets", {meets: res.data});
             }).catch(err => {console.log(err)});

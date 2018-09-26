@@ -15,7 +15,7 @@ class MeetDisplay extends Component {
                 <p>{this.props.online ?
                     "Host Gamertag: " + this.props.handle 
                     : 
-                    this.props.location ? "Event Location: " + this.props.location.address + " " + this.props.location.city + ", " + this.props.location.state + " " + this.props.location.zip : ""
+                    "Event Location: " + this.props.address + " " + this.props.city + ", " + this.props.state + " " + this.props.zip
                     }</p>
                 {this.props.verbose ?
                     <div>
