@@ -42,44 +42,54 @@ class EventForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleFormSubmit}>
-                    <label htmlFor="game">Game Title</label>
-                    <input
-                        name="game"
-                        type="text"
-                        className="form-control"
-                        id="game"
-                        onChange={this.handleChange} />
-                    <label htmlFor="description">Describe your event</label>
-                    <textarea
-                        name="description"
-                        type="text"
-                        className="form-control"
-                        id="description"
-                        onChange={this.handleChange} />
-                    <label htmlFor="time">When is your event?</label>
-                    <input
-                        name="time"
-                        type="datetime-local"
-                        className="form-control"
-                        id="time"
-                        onChange={this.handleChange} />
-                    <label htmlFor="online">Is your event online or in person?</label>
-                    <select
-                        name="online"
-                        className="form-control"
-                        onChange={this.handleChange}
-                        defaultValue={this.state.online}
-                    >
-                        <option value="online">Online</option>
-                        <option value="in person">In Person</option>
-                    </select>
-                    <label htmlFor="instructions">How do people join you?</label>
-                    <textarea
-                        name="instructions"
-                        type="text"
-                        className="form-control"
-                        id="instructions"
-                        onChange={this.handleChange} />
+                    <div className="form-group">
+                        <label htmlFor="game">Game Title</label>
+                        <input
+                            name="game"
+                            type="text"
+                            className="form-control"
+                            id="game"
+                            onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Describe your event</label>
+                        <textarea
+                            name="description"
+                            type="text"
+                            className="form-control"
+                            id="description"
+                            onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="time">When is your event?</label>
+                        <input
+                            name="time"
+                            type="datetime-local"
+                            className="form-control"
+                            id="time"
+                            onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="online">Is your event online or in person?</label>
+                        <select
+                            name="online"
+                            className="form-control"
+                            onChange={this.handleChange}
+                            defaultValue={this.state.online}
+                        >
+                            <option value="online">Online</option>
+                            <option value="in person">In Person</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="instructions">How do people join you?</label>
+                        <textarea
+                            name="instructions"
+                            type="text"
+                            className="form-control"
+                            id="instructions"
+                            onChange={this.handleChange} />
+                    </div>
                     <LocOrHandle online={this.state.online} handleChange={this.handleChange} />
                     <input
                         type="submit"
