@@ -1,6 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+let LocationSchema = new Schema({
+    address: {
+        type: String
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    zip: {
+        type: Number,
+        required: true
+    }
+});
+
 let MeetSchema = new Schema({
     game: {
       type: String,
@@ -21,7 +39,7 @@ let MeetSchema = new Schema({
         required: true
     },
     location: {
-        type: String
+        type: LocationSchema
     },
     instructions: {
         type: String,
