@@ -26,7 +26,20 @@ module.exports = {
 
     getUser: function (req, res) {
         db.User.findById(req.params.id)
-        .populate("meets")
+        .populate({
+            path: "attending",
+            populate: {
+                path: "host",
+                select: "username"
+            }
+        })
+        .populate({
+            path: "hosting",
+            populate: {
+                path: "host",
+                select: "username"
+            }
+        })
         .then(data => {
             if (data) {
                 res.json(data);
@@ -41,14 +54,16 @@ module.exports = {
             .then(user => {
                 db.Meet.findById(req.body.meetId)
                     .then(meet => {
+                        console.log(user);
+                        console.log(meet);
                         const inMeetArray = meet.attendees.some(function (ids) {
                             return ids.equals(user._id);
                         });
-                        const inUserArray = user.meets.some(function (ids) {
+                        const inUserArray = user.attending.some(function (ids) {
                             return ids.equals(meet._id);
                         });
                         if(!inMeetArray) meet.attendees.push(user);
-                        if(!inUserArray) user.meets.push(meet);
+                        if(!inUserArray) user.attending.push(meet);
                         meet.save()
                             .then(updatedMeet => {
                                 user.save()
@@ -74,7 +89,7 @@ module.exports = {
                 db.Meet.findById(req.params.meetId)
                     .then(meet => {
                         meet.attendees.remove(user);
-                        user.meets.remove(meet);
+                        user.attending.remove(meet);
                         meet.save()
                             .then(updatedMeet => {
                                 user.save()

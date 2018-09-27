@@ -3,7 +3,14 @@ const db = require("../models");
 module.exports = {
     saveMeet: function (req, res) {
         db.Meet.create(req.body)
-            .then(data => res.json(data))
+            .then(meet => {
+                db.User.findById(req.body.host)
+                .then(user => {
+                    user.hosting.push(meet._id);
+                    user.save()
+                    .then(updatedUser => res.json(meet));
+                })
+            })
             .catch(err => res.status(400).json(err));
     },
 

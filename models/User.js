@@ -26,7 +26,8 @@ let UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  meets: [{type: Schema.Types.ObjectId, ref: 'Meet'}]
+  hosting: [{type: Schema.Types.ObjectId, ref: 'Meet'}],
+  attending: [{type: Schema.Types.ObjectId, ref: 'Meet'}]
 });
 
 // Execute before each user.save() call

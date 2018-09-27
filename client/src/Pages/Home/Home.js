@@ -4,8 +4,8 @@ class Home extends Component {
     render() {
         return (
             <div className="row">
-                <div className="col">
-                    <h1>Welcome to Game-Meet</h1>
+                <div className="col text-center">
+                    <h1>Welcome to Game Meet</h1>
                 </div>
             </div>
         );
