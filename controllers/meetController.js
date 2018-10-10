@@ -59,8 +59,8 @@ module.exports = {
     withinDistance: function (req, res) {
         db.Meet.find({online: false})
             .then(meets => {
-                const origin = 'San Diego, CA';
-                const destinations = meets.map(meet => `${meet.address} ${meet.city} ${meet.state}`);
+                const origin = `${req.query.address} ${req.query.city}, ${req.query.state}`;
+                const destinations = meets.map(meet => `${meet.address} ${meet.city}, ${meet.state}`);
                 googleMapsClient.distanceMatrix(
                     {
                         origins: [origin],
@@ -69,7 +69,11 @@ module.exports = {
                     })
                     .asPromise()
                     .then(response => {
-                        res.json(response.json);
+                        let returns = [];
+                        for(let i = 0; i < meets.length; i++) {
+                            if(response.json.rows[0].elements[i].distance.value < 1600 * req.query.distance) returns.push(meets[i]);
+                        }
+                        res.json(returns);
                     })
                     .catch(err => res.status(400).json(err));
             })
