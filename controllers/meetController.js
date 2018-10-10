@@ -1,15 +1,20 @@
 const db = require("../models");
+const googleMapsClient = require("@google/maps").createClient({
+    key: "AIzaSyCEqwLravExN1A2V7cbCeqzt0NAUQZtU24",
+    Promise: Promise
+}
+);
 
 module.exports = {
     saveMeet: function (req, res) {
         db.Meet.create(req.body)
             .then(meet => {
                 db.User.findById(req.body.host)
-                .then(user => {
-                    user.hosting.push(meet._id);
-                    user.save()
-                    .then(updatedUser => res.json(meet));
-                })
+                    .then(user => {
+                        user.hosting.push(meet._id);
+                        user.save()
+                            .then(updatedUser => res.json(meet));
+                    })
             })
             .catch(err => res.status(400).json(err));
     },
@@ -49,5 +54,24 @@ module.exports = {
                 }
             })
             .catch(err => res.status(400).json(err));
+    },
+
+    withinDistance: function (req, res) {
+        db.Meet.find({online: false})
+            .then(meets => {
+                const origin = 'San Diego, CA';
+                const destinations = meets.map(meet => `${meet.address} ${meet.city} ${meet.state}`);
+                googleMapsClient.distanceMatrix(
+                    {
+                        origins: [origin],
+                        destinations: destinations,
+                        mode: 'driving'
+                    })
+                    .asPromise()
+                    .then(response => {
+                        res.json(response.json);
+                    })
+                    .catch(err => res.status(400).json(err));
+            })
     }
 }

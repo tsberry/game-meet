@@ -4,6 +4,7 @@ const isAuthenticated = require("../../config/auth");
 
 router.post("/", meetController.saveMeet);
 router.get("/search", meetController.search);
+router.get("/distance", meetController.withinDistance);
 router.get("/:id", isAuthenticated, meetController.getMeet);
 router.get("/", meetController.getAll);
 
