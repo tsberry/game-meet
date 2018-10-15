@@ -1,12 +1,10 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const exjwt = require('express-jwt');
 const mongoose = require('mongoose');
 const morgan = require('morgan'); // used to see requests
 const app = express();
-const db = require('./models');
-const routes = require("./routes");
+const routes = require('./routes');
 const PORT = process.env.PORT || 3001;
 
 // Setting CORS so that any website can
@@ -32,8 +30,8 @@ const isAuthenticated = exjwt({
 });
 
 // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
 }
 
 

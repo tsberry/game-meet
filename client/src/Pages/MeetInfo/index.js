@@ -1,1 +1,1 @@
-export { default } from "./MeetInfo";
+export { default } from './MeetInfo';

@@ -1,1 +1,1 @@
-export { default } from "./MeetButton";
+export { default } from './MeetButton';

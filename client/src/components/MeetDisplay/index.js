@@ -1,1 +1,1 @@
-export { default } from "./MeetDisplay";
+export { default } from './MeetDisplay';

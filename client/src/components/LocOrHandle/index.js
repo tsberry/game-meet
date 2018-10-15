@@ -1,1 +1,1 @@
-export { default } from "./LocOrHandle";
+export { default } from './LocOrHandle';
