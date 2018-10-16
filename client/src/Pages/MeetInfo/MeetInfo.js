@@ -7,8 +7,8 @@ class MeetInfo extends Component {
     meets: []
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location.state !== { meets: [] }) {
+  componentDidUpdate(prevProps) {
+    if (this.props.location.state !== prevProps.location.state) {
       API.getMeets()
         .then((res) => {
           this.setState({ meets: res.data });
