@@ -38,7 +38,7 @@ class SearchForm extends Component {
               <option value='in person'>In Person</option>
             </select>
           </div>
-          {this.props.online !== '' ? <LocOrHandle online={this.props.online} handleChange={this.props.handleChange} /> : ''}
+          {this.props.online !== '' ? <LocOrHandle online={this.props.online} search={true} handleChange={this.props.handleChange} /> : ''}
           <input
             type='submit'
             className='btn'

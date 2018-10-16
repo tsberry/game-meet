@@ -90,7 +90,7 @@ class EventForm extends Component {
               id='instructions'
               onChange={this.handleChange} />
           </div>
-          <LocOrHandle online={this.state.online} handleChange={this.handleChange} />
+          <LocOrHandle online={this.state.online} search={false} handleChange={this.handleChange} />
           <input
             type='submit'
             className='btn'

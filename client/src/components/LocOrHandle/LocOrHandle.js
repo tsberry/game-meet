@@ -5,7 +5,7 @@ class LocOrHandle extends Component {
     const onlineBlock =
       <div className='form-row'>
         <div className='col'>
-          <div className='form-group'>
+          {!this.props.search ? <div className='form-group'>
             <label htmlFor='handle'>What is your relevant handle or gamertag?</label>
             <input
               name='handle'
@@ -13,7 +13,7 @@ class LocOrHandle extends Component {
               className='form-control'
               id='handle'
               onChange={this.props.handleChange} />
-          </div>
+          </div> : ''}
         </div>
       </div>;
 
@@ -116,6 +116,16 @@ class LocOrHandle extends Component {
               id='zip'
               onChange={this.props.handleChange} />
           </div>
+          {this.props.search ? <div className='form-group'>
+            <label htmlFor='distance'>Within</label>
+            <input
+              name='distance'
+              type='text'
+              className='form-control'
+              id='distance'
+              onChange={this.props.handleChange} />
+          </div>
+            : ''}
         </div>
       </div>
     </div>;

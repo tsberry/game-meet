@@ -11,12 +11,13 @@ class Search extends Component {
     address: '',
     city: '',
     state: '',
-    zip: ''
+    zip: '',
+    distance: ''
   }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    API.search(this.state.game, this.state.time, this.state.online, this.state.handle, this.state.address, this.state.city, this.state.state, this.state.zip)
+    API.search(this.state.game, this.state.time, this.state.online, this.state.handle, this.state.address, this.state.city, this.state.state, this.state.zip, this.state.distance)
       .then((res) => {
         this.props.history.push('/meets', { meets: res.data });
       }).catch((err) => { console.info(err); });

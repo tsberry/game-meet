@@ -36,14 +36,13 @@ export default {
   getMeets: () => {
     return axios.get('/api/meet');
   },
-  search: (game, time, online, handle, address, city, state, zip) => {
+  search: (game, time, online, handle, address, city, state, zip, distance) => {
     let params = {};
     if (game !== '') params.game = game;
     if (time !== '') params.time = time;
     if (online !== '') {
       if (online === 'online') {
         params.online = true;
-        if (handle !== '') params.handle = handle;
       }
       else {
         params.online = false;
@@ -51,6 +50,7 @@ export default {
         if (city !== '') params.city = city;
         if (state !== '') params.state = state;
         if (zip !== '') params.zip = zip;
+        if (distance !== '') params.distance = distance;
       }
     }
     let esc = encodeURIComponent;

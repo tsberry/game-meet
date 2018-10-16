@@ -42,39 +42,34 @@ module.exports = {
   },
 
   search: function (req, res) {
-    db.Meet.find(req.query)
+    const query = req.query;
+    delete query.distance;
+    db.Meet.find(query)
       .populate('host', 'username')
       .populate('attendees', 'username')
-      .then((data) => {
-        if (data) {
-          res.json(data);
-        } else {
-          res.status(404).send({ success: false, message: 'No meet found' });
-        }
-      })
-      .catch((err) => res.status(400).json(err));
-  },
-
-  withinDistance: function (req, res) {
-    db.Meet.find({ online: false })
       .then((meets) => {
-        const origin = `${req.query.address} ${req.query.city}, ${req.query.state}`;
-        const destinations = meets.map((meet) => `${meet.address} ${meet.city}, ${meet.state}`);
-        googleMapsClient.distanceMatrix(
-          {
-            origins: [origin],
-            destinations: destinations,
-            mode: 'driving'
-          })
-          .asPromise()
-          .then((response) => {
-            let returns = [];
-            for (let i = 0; i < meets.length; i++) {
-              if (response.json.rows[0].elements[i].distance.value < 1600 * req.query.distance) returns.push(meets[i]);
-            }
-            res.json(returns);
-          })
-          .catch((err) => res.status(400).json(err));
+        if(req.query.online && req.query.distance) {
+          const origin = `${req.query.address} ${req.query.city}, ${req.query.state}`;
+          const destinations = meets.map((meet) => `${meet.address} ${meet.city}, ${meet.state}`);
+          googleMapsClient.distanceMatrix(
+            {
+              origins: [origin],
+              destinations: destinations,
+              mode: 'driving'
+            })
+            .asPromise()
+            .then((response) => {
+              let returns = [];
+              for (let i = 0; i < meets.length; i++) {
+                if (response.json.rows[0].elements[i].distance.value < 1600 * req.query.distance) returns.push(meets[i]);
+              }
+              res.json(returns);
+            })
+            .catch((err) => res.status(400).json(err));
+        }
+        else {
+          res.json(meets);
+        }
       });
   }
 };
